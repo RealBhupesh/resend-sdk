@@ -29,7 +29,7 @@ generated client code.
 | Scaffold | Stopped at `npm install` (version conflict). I fixed it with a one-line change. |
 | Generate | Finished fine in 7 s, with 18 warnings |
 | TypeScript offline tests (Node 24) | 650 tests: 577 passed, 5 failed, 68 skipped |
-| TypeScript offline tests (Node 26) | 576 passed, 6 failed (one extra failure, see issue 7) |
+| TypeScript offline tests (Node 26) | 576 passed, 6 failed (one extra failure, see issue 8) |
 | Python offline tests (3.12) | 437 passed, 5 failed, 147 skipped |
 | TypeScript live tests (real key) | 498 passed, 76 failed, 76 skipped, 222 s |
 
@@ -66,24 +66,53 @@ the most important field, so I'd like it typed. A `from_` alias might work.
 The scaffold's `.sdk/.gitignore` ignores `log/`, and every generate then prints a warning
 saying to delete that line. I deleted it as the warning said.
 
-## Things I'm less sure about (they may be my mistake)
+### 5. Generated tests drop the parent id on nested resources
 
-### 5. Live tests couldn't find my API key
+*(Checked after my first draft. I originally listed this under "not sure".)*
 
-I followed the generated README and put `.env.local` in the project root. Every live request
-then failed with 401 (114 failures at first). A direct `curl` with the same key worked, so the
-key was fine.
+Some calls on sub-resources fail because the parent id is missing:
 
-Why I think it happened: the tests load the file with
-`loadEnvLocal(__dirname + '/../../../.env.local')`. In the compiled copy that `npm test` runs
-(`ts/dist-test/entity/<name>/`), that path points to `ts/.env.local`, not the project root.
-A missing file is ignored without a message.
+- `AutomationRun.load`: "URL path has no value for {automation_id}"
+- `RetrievedAttachment.load`: "missing: email_id"
+- In the `RemoveSuppressionResponseSuccess` basic flow, the item still shows in the list after
+  it was removed. I didn't dig into this one.
 
-How sure I am: I read the code but did **not** try putting the file in `ts/`, so I may have
-misunderstood the instructions. When I exported the key as an environment variable instead,
-the requests worked (116 returned 200).
+I wondered whether I should have added something to `guide.aontu`, so I looked at the model.
+I don't think I needed to:
 
-### 6. Test data left in my account
+- The model already knows the parent. `.sdk/model/entity/automation_run.aontu` lists
+  `automation_id` as a required path parameter, with `automation` as an ancestor.
+- The test data has it too: every record in `AutomationRunTestData.json` has
+  `"automation_id": "AUTOMATION01"`, and the flow step's match has both `automation_id` and `id`.
+- The generated test still builds the match with `id` only:
+  `automation_run_ref01_match_dt0.id = automation_run_ref01_data.id`, then calls
+  `load(...)`. So the parent id is dropped when the test code is written.
+
+The docs are mixed. The README example for `AutomationRun` correctly passes `automation_id`.
+The one for `RetrievedAttachment` is `load({ id: 'retrieved_attachment_id' })` with no
+`email_id`, in both TypeScript and Python. The doc-example check catches it. My guess is that
+attachments are harder because the entity has two routes, `/emails/{email_id}/attachments/...`
+and `/emails/receiving/{email_id}/attachments/...`, but that's only a guess.
+
+## Things that were partly my mistake, or that I'm not sure about
+
+### 6. Live tests couldn't find my API key (mostly my mistake)
+
+I put `.env.local` in the top folder of the repository, and every live request failed with
+401. When I looked again, the TypeScript tests read `ts/.env.local`. The instructions are in
+`ts/README.md`, so "the project root" there most likely means `ts/`. I misread it. With the
+file in `ts/`, the tests load the key correctly (I checked with a dummy value).
+
+Two small things might still be worth improving:
+
+- When live mode is on and no key is found, the tests carry on silently and every request goes
+  out without a key. A warning like "no API key found" would have saved me some time.
+- The Python tests read `open("../../.env.local")`, relative to where they're run from. With
+  the documented `cd py && pytest test/`, that is two folders up from `py/`, outside the
+  repository, not `py/.env.local`. So TypeScript and Python look in different places. I only
+  checked this by reading `py/test/runner.py`, not by running it.
+
+### 7. Test data left in my account
 
 After the live run I found a webhook, a contact and a suppression entry in my Resend account,
 including `steve.wozniak@gmail.com`, an address that appears in the spec's examples. The log
@@ -94,27 +123,11 @@ in my brand-new account many steps were skipped or blocked, so this may be a sid
 haven't checked. I mention the address because for an email API, a real-looking third-party
 address in a suppression list stood out to me. An address on `example.com` might be safer.
 
-### 7. Node 26
+### 8. Node 26
 
 The doc-example tests crash on Node 26 (`stripTypeScriptTypes` only accepts `'strip'` there).
 They run on Node 24. The guide says "Node.js 24 or later", so I mention it for completeness,
 but Node 26 is very new and I chose to use it.
-
-### 8. Nested resources are missing the parent id
-
-Calls on sub-resources fail because the parent id is missing:
-
-- `AutomationRun.load`: "URL path has no value for {automation_id}"
-- `RetrievedAttachment.load`: "missing: email_id". This example is in the generated README
-  and REFERENCE in both languages, and the doc-example check correctly fails on it.
-- In the `RemoveSuppressionResponseSuccess` basic flow, the item still shows in the list after
-  it was removed.
-
-The failures are the same in TypeScript and Python, so I think it comes from how the model was
-built from the spec rather than from the language templates. How sure I am: not very. I
-haven't checked whether it's a generator bug or something I should have added to
-`guide.aontu` myself. The AGENTS.md says that file is for "corrections to how apidef reads the
-spec", so it may well be that.
 
 ## Smaller notes
 
