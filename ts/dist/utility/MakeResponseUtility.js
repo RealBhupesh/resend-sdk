@@ -1,0 +1,50 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.makeResponse = makeResponse;
+const MakeRequestUtility_1 = require("./MakeRequestUtility");
+async function makeResponse(ctx) {
+    // PreResponse feature hook has already provided a result.
+    if (ctx.out.response) {
+        return ctx.out.response;
+    }
+    const utility = ctx.utility;
+    const resultBasic = utility.resultBasic;
+    const resultHeaders = utility.resultHeaders;
+    const resultBody = utility.resultBody;
+    const transformResponse = utility.transformResponse;
+    const graphqlErrors = utility.graphqlErrors;
+    const spec = ctx.spec;
+    const result = ctx.result;
+    const response = ctx.response;
+    if (null == spec) {
+        return ctx.error('response_no_spec', 'Expected context spec property to be defined.');
+    }
+    if (null == response) {
+        return ctx.error('response_no_response', 'Expected context response property to be defined.');
+    }
+    if (null == result) {
+        return ctx.error('response_no_result', 'Expected context result property to be defined.');
+    }
+    spec.step = 'response';
+    try {
+        resultBasic(ctx);
+        resultHeaders(ctx);
+        await resultBody(ctx);
+        // GraphQL reports failures as a top-level `errors` array under HTTP 200,
+        // so resultBasic's status check never sees them. Lift them here, before
+        // the response transform tries to unwrap data that is not there.
+        graphqlErrors(ctx);
+        transformResponse(ctx);
+        if (null == result.err) {
+            result.ok = true;
+        }
+    }
+    catch (err) {
+        result.err = (0, MakeRequestUtility_1.abortError)(ctx, err);
+    }
+    if (ctx.ctrl.explain) {
+        ctx.ctrl.explain.result = result;
+    }
+    return response;
+}
+//# sourceMappingURL=MakeResponseUtility.js.map

@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "api_key": {
+      "API_KEY00": {
+        "created_at": "s28",
+        "id": "API_KEY00",
+        "last_used_at": "s2a",
+        "name": "s2b"
+      },
+      "API_KEY01": {
+        "created_at": "s50",
+        "id": "API_KEY01",
+        "last_used_at": "s52",
+        "name": "s53"
+      },
+      "API_KEY02": {
+        "created_at": "s78",
+        "id": "API_KEY02",
+        "last_used_at": "s7a",
+        "name": "s7b"
+      }
+    }
+  },
+  "new": {
+    "api_key": {
+      "api_key_ref01": {
+        "created_at": "sa0",
+        "last_used_at": "sa2",
+        "name": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /api-keys": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /api-keys/{api_key_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

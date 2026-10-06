@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "create_broadcast_response_success": {
+      "CREATE_BROADCAST_RESPONSE_SUCCESS00": {
+        "audience_id": "AUDIENCE01",
+        "from": "s79",
+        "html": "s7a",
+        "name": "s7b",
+        "preview_text": "s7c",
+        "reply_to": [],
+        "scheduled_at": "s7e",
+        "segment_id": "SEGMENT01",
+        "send": true,
+        "subject": "s81",
+        "text": "s82",
+        "topic_id": "TOPIC01",
+        "id": "CREATE_BROADCAST_RESPONSE_SUCCESS00"
+      },
+      "CREATE_BROADCAST_RESPONSE_SUCCESS01": {
+        "audience_id": "AUDIENCE01",
+        "from": "sf1",
+        "html": "sf2",
+        "name": "sf3",
+        "preview_text": "sf4",
+        "reply_to": [],
+        "scheduled_at": "sf6",
+        "segment_id": "SEGMENT01",
+        "send": true,
+        "subject": "sf9",
+        "text": "sfa",
+        "topic_id": "TOPIC01",
+        "id": "CREATE_BROADCAST_RESPONSE_SUCCESS01"
+      },
+      "CREATE_BROADCAST_RESPONSE_SUCCESS02": {
+        "audience_id": "AUDIENCE01",
+        "from": "s169",
+        "html": "s16a",
+        "name": "s16b",
+        "preview_text": "s16c",
+        "reply_to": [],
+        "scheduled_at": "s16e",
+        "segment_id": "SEGMENT01",
+        "send": true,
+        "subject": "s171",
+        "text": "s172",
+        "topic_id": "TOPIC01",
+        "id": "CREATE_BROADCAST_RESPONSE_SUCCESS02"
+      }
+    }
+  },
+  "new": {
+    "create_broadcast_response_success": {
+      "create_broadcast_response_success_ref01": {
+        "audience_id": "AUDIENCE01",
+        "from": "s1e1",
+        "html": "s1e2",
+        "name": "s1e3",
+        "preview_text": "s1e4",
+        "reply_to": [],
+        "scheduled_at": "s1e6",
+        "segment_id": "SEGMENT01",
+        "send": true,
+        "subject": "s1e9",
+        "text": "s1ea",
+        "topic_id": "TOPIC01"
+      }
+    }
+  },
+  "requests": {
+    "POST /broadcasts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

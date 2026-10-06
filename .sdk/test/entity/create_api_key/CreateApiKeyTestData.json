@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "create_api_key": {
+      "CREATE_API_KEY00": {
+        "domain_id": "DOMAIN01",
+        "name": "s1f",
+        "permission": "s20",
+        "id": "CREATE_API_KEY00"
+      },
+      "CREATE_API_KEY01": {
+        "domain_id": "DOMAIN01",
+        "name": "s3d",
+        "permission": "s3e",
+        "id": "CREATE_API_KEY01"
+      },
+      "CREATE_API_KEY02": {
+        "domain_id": "DOMAIN01",
+        "name": "s5b",
+        "permission": "s5c",
+        "id": "CREATE_API_KEY02"
+      }
+    }
+  },
+  "new": {
+    "create_api_key": {
+      "create_api_key_ref01": {
+        "domain_id": "DOMAIN01",
+        "name": "s79",
+        "permission": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api-keys": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

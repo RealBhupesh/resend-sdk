@@ -1,0 +1,31 @@
+# BasicRemoveTemplateResponseSuccessFlow
+
+main: kit: flow: BasicRemoveTemplateResponseSuccessFlow:
+{
+  entity: "remove_template_response_success",
+  kind: "basic",
+  name: "BasicRemoveTemplateResponseSuccessFlow",
+  step: [
+    {
+      i: {
+        ref: "remove_template_response_success_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "remove_template_response_success_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "remove_template_response_success01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicRemoveTemplateResponseSuccessFlow"
+}

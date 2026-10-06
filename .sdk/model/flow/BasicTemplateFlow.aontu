@@ -1,0 +1,52 @@
+# BasicTemplateFlow
+
+main: kit: flow: BasicTemplateFlow:
+{
+  entity: "template",
+  kind: "basic",
+  name: "BasicTemplateFlow",
+  step: [
+    {
+      i: {
+        ref: "template_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "template_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "template_ref01",
+        srcdatavar: "template_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "template01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-template_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTemplateFlow"
+}

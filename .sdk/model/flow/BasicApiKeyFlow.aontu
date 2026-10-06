@@ -1,0 +1,22 @@
+# BasicApiKeyFlow
+
+main: kit: flow: BasicApiKeyFlow:
+{
+  entity: "api_key",
+  kind: "basic",
+  name: "BasicApiKeyFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "api_key_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicApiKeyFlow"
+}

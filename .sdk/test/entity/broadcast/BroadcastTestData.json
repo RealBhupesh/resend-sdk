@@ -1,0 +1,104 @@
+{
+  "existing": {
+    "broadcast": {
+      "BROADCAST00": {
+        "audience_id": "AUDIENCE01",
+        "created_at": "s97",
+        "from": "s98",
+        "html": "s99",
+        "id": "BROADCAST00",
+        "name": "s9b",
+        "preview_text": "s9c",
+        "reply_to": [],
+        "scheduled_at": "s9e",
+        "segment_id": "SEGMENT01",
+        "sent_at": "sa0",
+        "status": "sa1",
+        "subject": "sa2",
+        "text": "sa3",
+        "topic_id": "TOPIC01"
+      },
+      "BROADCAST01": {
+        "audience_id": "AUDIENCE01",
+        "created_at": "s12d",
+        "from": "s12e",
+        "html": "s12f",
+        "id": "BROADCAST01",
+        "name": "s131",
+        "preview_text": "s132",
+        "reply_to": [],
+        "scheduled_at": "s134",
+        "segment_id": "SEGMENT01",
+        "sent_at": "s136",
+        "status": "s137",
+        "subject": "s138",
+        "text": "s139",
+        "topic_id": "TOPIC01"
+      },
+      "BROADCAST02": {
+        "audience_id": "AUDIENCE01",
+        "created_at": "s1c3",
+        "from": "s1c4",
+        "html": "s1c5",
+        "id": "BROADCAST02",
+        "name": "s1c7",
+        "preview_text": "s1c8",
+        "reply_to": [],
+        "scheduled_at": "s1ca",
+        "segment_id": "SEGMENT01",
+        "sent_at": "s1cc",
+        "status": "s1cd",
+        "subject": "s1ce",
+        "text": "s1cf",
+        "topic_id": "TOPIC01"
+      }
+    }
+  },
+  "new": {
+    "broadcast": {
+      "broadcast_ref01": {
+        "audience_id": "AUDIENCE01",
+        "created_at": "s259",
+        "from": "s25a",
+        "html": "s25b",
+        "name": "s25d",
+        "preview_text": "s25e",
+        "reply_to": [],
+        "scheduled_at": "s260",
+        "segment_id": "SEGMENT01",
+        "sent_at": "s262",
+        "status": "s263",
+        "subject": "s264",
+        "text": "s265",
+        "topic_id": "TOPIC01"
+      }
+    }
+  },
+  "requests": {
+    "POST /broadcasts/{id}/cancel": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /broadcasts/{id}/duplicate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /broadcasts/{id}/send": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /broadcasts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /broadcasts/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+# Entity: create_api_key
+
+main: kit: entity: create_api_key: {
+
+  alias: field: {}
+
+  fields: {
+    domain_id: {
+      h: "Domain Id"
+      n: "domain_id"
+      r: false
+      sh: "Restrict an API key to send emails only from a specific domain."
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The API key name."
+      t: "`$STRING`"
+    }
+    permission: {
+      h: "Permission"
+      n: "permission"
+      r: false
+      sh: "The API key can have full access to Resend’s API or be only restricted to send emails."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "create_api_key"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api-keys"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api-keys"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api-keys"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

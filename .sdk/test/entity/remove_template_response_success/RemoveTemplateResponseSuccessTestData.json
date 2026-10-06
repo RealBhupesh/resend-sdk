@@ -1,0 +1,65 @@
+{
+  "existing": {
+    "remove_template_response_success": {
+      "REMOVE_TEMPLATE_RESPONSE_SUCCESS00": {
+        "alias": "s5a",
+        "from": "s5b",
+        "html": "s5c",
+        "id": "REMOVE_TEMPLATE_RESPONSE_SUCCESS00",
+        "name": "s5e",
+        "reply_to": [],
+        "subject": "s60",
+        "text": "s61",
+        "variables": []
+      },
+      "REMOVE_TEMPLATE_RESPONSE_SUCCESS01": {
+        "alias": "sb4",
+        "from": "sb5",
+        "html": "sb6",
+        "id": "REMOVE_TEMPLATE_RESPONSE_SUCCESS01",
+        "name": "sb8",
+        "reply_to": [],
+        "subject": "sba",
+        "text": "sbb",
+        "variables": []
+      },
+      "REMOVE_TEMPLATE_RESPONSE_SUCCESS02": {
+        "alias": "s10e",
+        "from": "s10f",
+        "html": "s110",
+        "id": "REMOVE_TEMPLATE_RESPONSE_SUCCESS02",
+        "name": "s112",
+        "reply_to": [],
+        "subject": "s114",
+        "text": "s115",
+        "variables": []
+      }
+    }
+  },
+  "new": {
+    "remove_template_response_success": {
+      "remove_template_response_success_ref01": {
+        "alias": "s168",
+        "from": "s169",
+        "html": "s16a",
+        "name": "s16c",
+        "reply_to": [],
+        "subject": "s16e",
+        "text": "s16f",
+        "variables": []
+      }
+    }
+  },
+  "requests": {
+    "POST /templates": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /templates/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}
